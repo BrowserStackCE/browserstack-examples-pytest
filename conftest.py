@@ -2,8 +2,13 @@ import pytest
 from browserstack.local import Local
 import os, json
 from jsonmerge import merge
+from dotenv import load_dotenv
+
+load_dotenv()
+
 CONFIG_FILE = os.environ['CONFIG_FILE'] if 'CONFIG_FILE' in os.environ else 'config/single.json'
 TASK_ID = int(os.environ['TASK_ID']) if 'TASK_ID' in os.environ else 0
+
 
 with open(CONFIG_FILE) as data_file:
     CONFIG = json.load(data_file)
@@ -32,10 +37,15 @@ def session_capabilities():
   capabilities['bstack:options']['userName'] = BROWSERSTACK_USERNAME
   capabilities['bstack:options']['accessKey'] = BROWSERSTACK_ACCESS_KEY
   capabilities['bstack:options']['source'] = 'pytest:sample-main:v1.0'
+  print(CONFIG['base_url'])
   if "local" in capabilities['bstack:options'] and capabilities['bstack:options']['local']:
     start_local()
   return capabilities
 
+@pytest.fixture(scope='session')
+def base_url():
+  print(CONFIG['base_url'])
+  return CONFIG['base_url']
 
 def pytest_sessionfinish(session, exitstatus):
   stop_local()

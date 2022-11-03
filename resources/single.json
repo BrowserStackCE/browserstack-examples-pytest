@@ -1,11 +1,12 @@
 {
     "user": "BROWSERSTACK_USERNAME",
     "key": "BROWSERSTACK_ACCESS_KEY",
+    "base_url":"https://bstackdemo.com/",
     "capabilities": {
         "bstack:options": {
             "projectName": "Pytest Browserstack",
-            "buildName": "browserstack-build-1",
-            "sessionName": "BStack sample pytest",
+            "buildName": "browserstack-build-2",
+            "sessionName": "BStack sample pytest - Single",
             "local": false,
             "debug": "true",
             "networkLogs": "true"

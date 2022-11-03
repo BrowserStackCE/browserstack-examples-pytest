@@ -16,7 +16,7 @@ def test_example(selenium, base_url):
     #Entering the username
     WebDriverWait(selenium, 20).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '#username input')))
     username = selenium.find_element(By.CSS_SELECTOR, "#username input")
-    username.send_keys("fav_user\n")
+    username.send_keys("existing_orders_user\n")
     #Entering the password
     WebDriverWait(selenium, 20).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '#password input')))
     password = selenium.find_element(By.CSS_SELECTOR, "#password input")
@@ -24,11 +24,13 @@ def test_example(selenium, base_url):
     #Clicking on Login
     WebDriverWait(selenium, 20).until(EC.element_to_be_clickable((By.ID, 'login-btn')))
     selenium.find_element(By.ID, "login-btn").click()
-    #Check if username is present
-    WebDriverWait(selenium, 20).until(EC.visibility_of_element_located((By.CLASS_NAME, 'username')))
-    username = selenium.find_element(By.CLASS_NAME, 'username').text
-
-    if username == "fav_user":
+    #Click on "Orders" link
+    WebDriverWait(selenium, 20).until(EC.element_to_be_clickable((By.ID, 'orders')))
+    selenium.find_element(By.ID, 'orders').click()
+    #Should see elements in list
+    time.sleep(5)
+    try:
+        selenium.find_element(By.CLASS_NAME,'order')
         selenium.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
-    else:
-        selenium.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Username not found. Login Failed"}}')
+    except NoSuchElementException:
+        selenium.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Order Not Placed Successfully"}}')

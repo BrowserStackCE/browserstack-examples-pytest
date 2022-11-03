@@ -24,11 +24,11 @@ def test_example(selenium, base_url):
     #Clicking on Login
     WebDriverWait(selenium, 20).until(EC.element_to_be_clickable((By.ID, 'login-btn')))
     selenium.find_element(By.ID, "login-btn").click()
-    #Check if username is present
-    WebDriverWait(selenium, 20).until(EC.visibility_of_element_located((By.CLASS_NAME, 'username')))
-    username = selenium.find_element(By.CLASS_NAME, 'username').text
-
-    if username == "fav_user":
+    #Click on Offers
+    WebDriverWait(selenium, 20).until(EC.element_to_be_clickable((By.ID, 'offers')))
+    selenium.find_element(By.ID, "offers").click()
+    try:
+        selenium.find_element(By.CLASS_NAME,'offer')
         selenium.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
-    else:
-        selenium.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Username not found. Login Failed"}}')
+    except NoSuchElementException:
+        selenium.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Offers Not Found Successfully"}}')

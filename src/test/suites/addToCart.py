@@ -3,9 +3,10 @@ from selenium import webdriver
 import pytest
 from selenium.webdriver.common.by import By
 
-def test_example(selenium):
+@pytest.mark.nondestructive
+def test_example(selenium, base_url):
      # @ansel Read the below baseURL from the JSON file so that we can use this for local as well. 
-    selenium.get('https://bstackdemo.com/')
+    selenium.get(base_url)
 
     # locating product on webpage and getting name of the product
     productText = selenium.find_element(By.XPATH, '//*[@id="1"]/p').text
