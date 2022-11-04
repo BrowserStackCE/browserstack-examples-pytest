@@ -1,0 +1,48 @@
+{
+    "user": "BROWSERSTACK_USERNAME",
+    "key": "BROWSERSTACK_ACCESS_KEY",
+    "base_url": "https://bstackdemo.com/",
+    "capabilities": {
+        "bstack:options": {
+            "projectName": "Pytest Browserstack",
+            "buildName": "browserstack-build-Parallel",
+            "local": false,
+            "debug": "true",
+            "networkLogs": "true"
+        }
+    },
+    "environments": [
+        {
+            "bstack:options": {
+                "os": "Windows",
+                "osVersion": "11"
+            },
+            "browserName": "chrome",
+            "browserVersion": "latest"
+        },
+        {
+            "bstack:options": {
+                "os": "Windows",
+                "osVersion": "10"
+            },
+            "browserName": "Chrome",
+            "browserVersion": "latest"
+        },
+        {
+            "bstack:options": {
+                "os": "OS X",
+                "osVersion": "Monterey"
+            },
+            "browserName": "Safari",
+            "browserVersion": "15.0"
+        },
+        {
+            "bstack:options": {
+                "os": "Windows",
+                "osVersion": "10"
+            },
+            "browserName": "Edge",
+            "browserVersion": "106.0"
+        }
+    ]
+}

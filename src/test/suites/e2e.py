@@ -8,7 +8,7 @@ import time
 
 @pytest.mark.nondestructive
 def test_example(selenium, base_url):
-    # @ansel Read the below baseURL from the JSON file so that we can use this for local as well. 
+    selenium.execute_script('browserstack_executor: {"action": "setSessionName", "arguments": {"name":"e2e_test"}}')
     selenium.get(base_url)
     #Clicking the Sign-in button
     WebDriverWait(selenium, 20).until(EC.element_to_be_clickable((By.ID, 'signin')))

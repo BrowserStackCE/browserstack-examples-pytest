@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 
 @pytest.mark.nondestructive
 def test_example(selenium, base_url):
-     # @ansel Read the below baseURL from the JSON file so that we can use this for local as well. 
+    selenium.execute_script('browserstack_executor: {"action": "setSessionName", "arguments": {"name":"addToCart_test"}}')
     selenium.get(base_url)
 
     # locating product on webpage and getting name of the product
