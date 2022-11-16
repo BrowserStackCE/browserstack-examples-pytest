@@ -1,13 +1,13 @@
-from src.pages.home import HomePage
+from src.pages.basePage import BasePage
 from selenium.webdriver.common.by import By
 
-class LoginPage(HomePage):
+class LoginPage(BasePage):
 
     SIGN_IN = (By.ID, 'signin')
     USERNAME_FIELD = (By.CSS_SELECTOR, '#username input')
     PASSWORD_FIELD = (By.CSS_SELECTOR, '#password input')
     LOGIN_BTN=(By.ID, 'login-btn')
-    SIGNED_IN_USER = (By.CLASS_NAME, 'username')
+    
 
     def sign_in(self, username, password):
         self.wait_for_element_clickable(self.SIGN_IN).click()
