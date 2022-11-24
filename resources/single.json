@@ -5,7 +5,7 @@
     "capabilities": {
         "bstack:options": {
             "projectName": "Pytest Browserstack",
-            "buildName": "browserstack-build-2",
+            "buildName": "browserstack-build-Single",
             "local": false,
             "debug": "true",
             "networkLogs": "true"

@@ -33,10 +33,12 @@ def stop_local():
 
 @pytest.fixture(scope='session')
 def session_capabilities():
+  test_name = os.environ.get('PYTEST_CURRENT_TEST').split(' ')[0].split('::')[1]
   capabilities = merge(CONFIG['environments'][TASK_ID],CONFIG["capabilities"])
   capabilities['bstack:options']['userName'] = BROWSERSTACK_USERNAME
   capabilities['bstack:options']['accessKey'] = BROWSERSTACK_ACCESS_KEY
   capabilities['bstack:options']['source'] = 'pytest:sample-main:v1.0'
+  capabilities['bstack:options']['sessionName'] = test_name
   print(CONFIG['base_url'])
   if "local" in capabilities['bstack:options'] and capabilities['bstack:options']['local']:
     start_local()

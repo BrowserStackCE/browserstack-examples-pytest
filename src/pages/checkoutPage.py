@@ -16,7 +16,7 @@ class CheckoutPage(BasePage):
         self.wait_element_present(self.LASTNAME).send_keys(lastname+'\n')
         self.wait_element_present(self.ADDRESS).send_keys(address+'\n')
         self.wait_element_present(self.PROVINCE).send_keys(province+'\n')
-        self.wait_element_present(self.POST_CODE).send_keys(postCode+'\n')
+        self.wait_element_present(self.POST_CODE).send_keys(postCode)
 
     def click_on_checkout(self):
         self.wait_for_element_clickable(self.CHECKOUT_SHIPPING_CONTINUE).click()
