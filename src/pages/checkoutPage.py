@@ -11,16 +11,25 @@ class CheckoutPage(BasePage):
     CHECKOUT_SHIPPING_CONTINUE = (By.ID, 'checkout-shipping-continue')
     CHECKOUT_BUTTON = (By.CLASS_NAME, 'optimizedCheckout-buttonSecondary')
 
-    def shipping_details(self, firstname, lastname, address, province, postCode):
+    # def shipping_details(self, firstname, lastname, address, province, postCode):
+        
+    def enterFirstName(self, firstname):    
         self.wait_element_present(self.FIRSTNAME).send_keys(firstname+'\n')
+    
+    def enterLastName(self, lastname):   
         self.wait_element_present(self.LASTNAME).send_keys(lastname+'\n')
+    
+    def enterAddressLine(self, address):   
         self.wait_element_present(self.ADDRESS).send_keys(address+'\n')
+    
+    def enterProvince(self, province):   
         self.wait_element_present(self.PROVINCE).send_keys(province+'\n')
+    
+    def enterPostCode(self, postCode):   
         self.wait_element_present(self.POST_CODE).send_keys(postCode)
 
     def click_on_checkout(self):
         self.wait_for_element_clickable(self.CHECKOUT_SHIPPING_CONTINUE).click()
-        self.wait_for_element_clickable(self.CHECKOUT_BUTTON).click()
 
     
 

@@ -7,24 +7,40 @@ import time
 from src.pages.loginPage import LoginPage
 from src.pages.homePage import HomePage
 from src.pages.checkoutPage import CheckoutPage
-from src.pages.orderConfirmation import OrderConfirmation
+from src.pages.orderConfirmation import OrderConfirmationPage
+from src.pages.orders import OrdersPage
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 @pytest.mark.nondestructive
-def test_example(driver, base_url):
+def test_e2e(driver, base_url):
     driver.execute_script('browserstack_executor: {"action": "setSessionName", "arguments": {"name":"e2e_test"}}')
-    login = LoginPage(driver, base_url)
-    login.open_base_url()
+    login = LoginPage(driver)
+    login.open_base_url(base_url)
     login.sign_in("fav_user","testingisfun99")
-    home = HomePage(driver, base_url)
+    home = HomePage(driver)
     home.add_elements_to_cart()
     home.click_buy()
-    checkout = CheckoutPage(driver, base_url)
-    checkout.shipping_details('first','last','test address','test province','123456')
+    checkout = CheckoutPage(driver)
+    checkout.enterFirstName('firstname')
+    checkout.enterLastName('lastname')
+    checkout.enterAddressLine('address')
+    checkout.enterProvince('state')
+    checkout.enterPostCode('12345')
     checkout.click_on_checkout()
-    order_confirm = OrderConfirmation(driver, base_url)
-    order_confirm.click_orders()
-    status = order_confirm.verify_orders_placed()
+    order_confirm = OrderConfirmationPage(driver)
+    order_confirm.wait_for_confirmation_message()
+    if os.environ['REMOTE'] == "true":
+        order_confirm.click_download_pdf()
+        order_confirm.download_exists(driver, 'confirmation.pdf' )
+    order_confirm.click_continue_shopping()
+    home.navigate_to_orders()
+    orders = OrdersPage(driver)
+    status = orders.verify_orders_placed()
     time.sleep(5)
     if status:
         driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')

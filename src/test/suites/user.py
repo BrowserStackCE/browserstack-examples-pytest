@@ -7,19 +7,32 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import time
 from src.pages.loginPage import LoginPage 
-from src.pages.orderConfirmation import OrderConfirmation
+from src.pages.orders import OrdersPage
+from src.pages.homePage import HomePage
 
 @pytest.mark.nondestructive
-def test_example(driver, base_url):
-    driver.execute_script('browserstack_executor: {"action": "setSessionName", "arguments": {"name":"User_test"}}')
-    login = LoginPage(driver, base_url)
-    login.open_base_url()
+def test_existing_orders(driver, base_url):
+    driver.execute_script('browserstack_executor: {"action": "setSessionName", "arguments": {"name":"Existing_Orders_Test"}}')
+    login = LoginPage(driver)
+    login.open_base_url(base_url)
     login.sign_in("existing_orders_user","testingisfun99")
-    order_confirm = OrderConfirmation(driver, base_url)
-    order_confirm.click_orders()
+    home = HomePage(driver)
+    home.navigate_to_orders()
+    order_confirm = OrdersPage(driver)
     status = order_confirm.verify_orders_placed()
-    time.sleep(5)
     if status:
         driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
     else:
-        driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Order Not Placed Successfully"}}')
+        driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "No Existing Orders"}}')
+
+@pytest.mark.nondestructive
+def test_no_image(driver, base_url):
+    driver.execute_script('browserstack_executor: {"action": "setSessionName", "arguments": {"name":"No_Image_Loaded_Test"}}')
+    login = LoginPage(driver)
+    login.open_base_url(base_url)
+    login.sign_in("image_not_loading_user","testingisfun99")
+    home = HomePage(driver)
+    if home.verify_image_thumbnail_loading():
+        driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
+    else:
+        driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Test Failed"}}')

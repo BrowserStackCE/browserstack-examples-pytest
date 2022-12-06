@@ -18,9 +18,9 @@ setup(
 
 def run_py_test(config, task_id=0):
     if platform.system() == "Windows":
-        sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && pytest -s src/test/suites/*.py --driver Browserstack -n 1"' % (config, task_id))
+        sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=true && pytest -s src/test/suites/*.py --driver Browserstack -n 1"' % (config, task_id))
     else:
-        sh('CONFIG_FILE=resources/%s.json TASK_ID=%s pytest -s src/test/suites/*.py --driver Browserstack -n 2' % (config, task_id))
+        sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=true pytest -s src/test/suites/*.py --driver Browserstack -n 2' % (config, task_id))
 
 @task
 @consume_nargs(1)

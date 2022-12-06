@@ -5,7 +5,7 @@
     "capabilities": {
         "bstack:options": {
             "projectName": "Pytest Browserstack",
-            "buildName": "browserstack-build-Single",
+            "buildName": "browserstack-build-single",
             "local": false,
             "debug": "true",
             "networkLogs": "true"
@@ -14,11 +14,11 @@
     "environments": [
         {
             "bstack:options": {
-                "os": "Windows",
-                "osVersion": "11"
+                "os": "OS X",
+                "osVersion": "Monterey"
             },
-            "browserName": "chrome",
-            "browserVersion": "latest"
+            "browserName": "Safari",
+            "browserVersion": "15.0"
         }
     ]
 }

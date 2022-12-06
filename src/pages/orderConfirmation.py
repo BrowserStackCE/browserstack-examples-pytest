@@ -1,19 +1,26 @@
 from src.pages.basePage import BasePage
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+import time
 
-class OrderConfirmation(BasePage):
+class OrderConfirmationPage(BasePage):
 
-    ORDERS_MENU = (By.ID, 'orders')
-    ORDER_ITEM = (By.CLASS_NAME, 'order')
+    CONFIRMATION_MESSAGE = (By.ID, 'confirmation-message')
+    DOWNLOAD_PDF = (By.ID, 'downloadpdf')
+    CHECKOUT_BUTTON = (By.CLASS_NAME, 'optimizedCheckout-buttonSecondary')
 
-    def click_orders(self):
-        self.wait_for_element_clickable(self.ORDERS_MENU).click()
+
+    def wait_for_confirmation_message(self):
+        self.wait_element_present(self.CONFIRMATION_MESSAGE)
     
-    def verify_orders_placed(self):
-        self.wait_element_present(self.ORDER_ITEM)
-        try:
-            self.find_element(self.ORDER_ITEM)
-            return True
-        except NoSuchElementException:
-            return False
+    def click_continue_shopping(self):    
+        self.wait_for_element_clickable(self.CHECKOUT_BUTTON).click()
+
+    def click_download_pdf(self):
+        self.wait_for_element_clickable(self.DOWNLOAD_PDF).click()
+
+    def download_exists(self, driver, filename):
+        time.sleep(20)
+        assert True == driver.execute_script('browserstack_executor: {"action": "fileExists", "arguments": {"fileName": "'+ filename +'"}}')
+    
+    
