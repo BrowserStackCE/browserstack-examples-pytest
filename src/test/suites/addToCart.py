@@ -2,10 +2,10 @@ from browserstack.local import Local
 from selenium import webdriver
 import pytest
 from selenium.webdriver.common.by import By
+import os
 
 @pytest.mark.nondestructive
 def test_example(driver, base_url):
-    driver.execute_script('browserstack_executor: {"action": "setSessionName", "arguments": {"name":"addToCart_test"}}')
     driver.get(base_url)
 
     # locating product on webpage and getting name of the product
@@ -21,7 +21,9 @@ def test_example(driver, base_url):
     productCartText = driver.find_element(By.XPATH, '//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div[3]/p[1]').text
 
     # checking whether product has been added to cart by comparing product name and marking test pass or fail
-    if productText == productCartText:
-        driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
-    else:
-        driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Product added to the cart not same as selected"}}')
+    if os.environ['REMOTE'] == "true":
+        driver.execute_script('browserstack_executor: {"action": "setSessionName", "arguments": {"name":"addToCart_test"}}')
+        if productText == productCartText:
+            driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
+        else:
+            driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Product added to the cart not same as selected"}}')

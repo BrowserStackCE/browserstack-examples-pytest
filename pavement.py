@@ -16,22 +16,30 @@ setup(
     packages=['tests']
 )
 
-def run_py_test(config, task_id=0):
-    if platform.system() == "Windows":
-        sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=true && pytest -s src/test/suites/*.py --driver Browserstack -n 1"' % (config, task_id))
+def run_py_test(config, run_type, task_id=0):
+    if run_type == 'remote':
+        if platform.system() == "Windows":
+            sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=true && pytest -s src/test/suites/*.py --driver Browserstack -n 1"' % (config, task_id))
+        else:
+            sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=true pytest -s src/test/suites/*.py --driver Browserstack -n 1' % (config, task_id))
     else:
-        sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=true pytest -s src/test/suites/*.py --driver Browserstack -n 2' % (config, task_id))
+        if platform.system() == "Windows":
+            sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=false && pytest -s src/test/suites/*.py --driver Chrome --driver-path src/driver/chromedriver -n 1"' % (config, task_id))
+        else:
+            sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=false pytest -s src/test/suites/*.py --driver Chrome --driver-path src/driver/chromedriver -n 1' % (config, task_id))
+        
 
 @task
-@consume_nargs(1)
+@consume_nargs(2)
 def run(args):
     """Run single, local and parallel test using different config."""
     jobs = []
+    print(*args)
     config_file = 'resources/%s.json' % (args[0])
     with open(config_file) as data_file:
         CONFIG = json.load(data_file)
     environments = CONFIG['environments']
     for i in range(len(environments)):
-        p = Process(target=run_py_test, args=(args[0], i))
+        p = Process(target=run_py_test, args=(args[0], args[1], i))
         jobs.append(p)
         p.start()
