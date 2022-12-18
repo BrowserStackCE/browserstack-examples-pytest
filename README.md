@@ -28,6 +28,34 @@ This repository contains the following Cucumber tests:
 | User    | Login as User with existing Orders  | This test verifies that existing orders are shown for user: "existing_orders_user"                                                                                                                                                                                                | user    |
 
 ---
+
+# On Premise
+
+This infrastructure points to running the tests on your own machine using a browser (e.g. Chrome) using the browser's driver executables (e.g. ChromeDriver for Chrome). Selenium enables this functionality using WebDriver for many popular browsers.
+
+## Om-Prem Prerequisites
+
+-   For this infrastructure configuration (i.e on-premise), ensure that the ChromeDriver is downloaded and added to the [driver](src/driver) directory.
+
+Note: The ChromeDriver version must match the Chrome browser version on your machine.
+
+## Running Your Tests
+
+### Run the entire test suite on your own machine
+
+-   How to run the test?
+
+    To run the entire test suite on your own machine, use the following command:
+
+    ```sh
+    paver run single on-prem
+    ```
+
+-   Output
+
+    This run profile executes the entire test suite sequentially on a single browser, on your own machine.
+
+---
 # BrowserStack
 
 [BrowserStack](https://browserstack.com) provides instant access to 3,000+ real mobile devices and browsers on a highly reliable cloud infrastructure that effortlessly scales as testing needs grow.
@@ -59,10 +87,6 @@ Note:
 
 ## Running Your Tests
 
-### Run a specific test on BrowserStack
-
-\[WIP\]
-
 ### Run the entire test suite in parallel on a single BrowserStack browser
 
 In this section, we will run the tests in parallel on a single browser on Browserstack. 
@@ -72,7 +96,7 @@ In this section, we will run the tests in parallel on a single browser on Browse
     To run the entire test suite in parallel on a single BrowserStack browser, use the following command:
 
     ```sh
-    paver run single
+    paver run single remote
     ```
 
 -   Output
@@ -88,7 +112,7 @@ In this section, we will run the tests in parallel on multiple browsers on Brows
     To run the entire test suite in parallel on multiple BrowserStack browsers, use the following command:
 
     ```sh
-    paver run parallel
+    paver run parallel remote
     ```
 ### [Web application hosted on internal environment] Running your tests on BrowserStack using BrowserStackLocal
 
@@ -112,7 +136,7 @@ In this section, we will run the tests in parallel on multiple browsers on Brows
     -   To run the default test scenario (e.g. End to End Scenario) on a single BrowserStack browser using BrowserStackLocal, use the following command:
 
     ```sh
-    paver run local
+    paver run local remote
     ```
 
 -   Output
