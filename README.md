@@ -33,7 +33,7 @@ This repository contains the following Cucumber tests:
 
 This infrastructure points to running the tests on your own machine using a browser (e.g. Chrome) using the browser's driver executables (e.g. ChromeDriver for Chrome). Selenium enables this functionality using WebDriver for many popular browsers.
 
-## Om-Prem Prerequisites
+## On-Prem Prerequisites
 
 -   For this infrastructure configuration (i.e on-premise), ensure that the ChromeDriver is downloaded and added to the [driver](src/driver) directory.
 
