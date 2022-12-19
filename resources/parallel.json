@@ -43,7 +43,18 @@
             },
             "browserName": "Edge",
             "browserVersion": "106.0"
+        },
+        {
+            "bstack:options": {
+                "osVersion": "13.0",
+                "deviceName": "Google Pixel 6 Pro"
+            }
+        },
+        {
+            "bstack:options" : {
+                "osVersion" : "16",
+                "deviceName" : "iPhone 12 Pro Max"
+                }
         }
     ]
 }
-
