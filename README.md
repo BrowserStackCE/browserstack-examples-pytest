@@ -28,7 +28,17 @@ This repository contains the following Cucumber tests:
 | User    | Login as User with existing Orders  | This test verifies that existing orders are shown for user: "existing_orders_user"                                                                                                                                                                                                | user    |
 
 ---
+## Configuring the maximum parallel test threads for this repository
 
+For all the parallel run configuration profiles, you can configure the maximum parallel test threads by changing the number of workers in [pavement.py](pavement.py) 
+
+```py
+... pytest -s src/test/suites/e2e.py --driver Browserstack -n 2
+```
+
+eg: Using `-n 2` will execute `2` tests in parallel per environment configuration that has been passed in the capabilities
+
+---
 # On Premise
 
 This infrastructure points to running the tests on your own machine using a browser (e.g. Chrome) using the browser's driver executables (e.g. ChromeDriver for Chrome). Selenium enables this functionality using WebDriver for many popular browsers.

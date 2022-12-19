@@ -10,8 +10,6 @@ class CheckoutPage(BasePage):
     POST_CODE= (By.ID, 'postCodeInput')
     CHECKOUT_SHIPPING_CONTINUE = (By.ID, 'checkout-shipping-continue')
     CHECKOUT_BUTTON = (By.CLASS_NAME, 'optimizedCheckout-buttonSecondary')
-
-    # def shipping_details(self, firstname, lastname, address, province, postCode):
         
     def enterFirstName(self, firstname):    
         self.wait_element_present(self.FIRSTNAME).send_keys(firstname+'\n')
@@ -30,6 +28,3 @@ class CheckoutPage(BasePage):
 
     def click_on_checkout(self):
         self.wait_for_element_clickable(self.CHECKOUT_SHIPPING_CONTINUE).click()
-
-    
-
