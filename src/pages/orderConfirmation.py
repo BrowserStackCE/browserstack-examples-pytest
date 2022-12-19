@@ -23,3 +23,4 @@ class OrderConfirmationPage(BasePage):
         time.sleep(20)
         assert True == driver.execute_script('browserstack_executor: {"action": "fileExists", "arguments": {"fileName": "'+ filename +'"}}')
     
+    

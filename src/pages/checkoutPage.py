@@ -28,3 +28,4 @@ class CheckoutPage(BasePage):
 
     def click_on_checkout(self):
         self.wait_for_element_clickable(self.CHECKOUT_SHIPPING_CONTINUE).click()
+

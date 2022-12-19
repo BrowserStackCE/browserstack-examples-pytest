@@ -17,4 +17,5 @@ class LoginPage(BasePage):
     
     def signed_in_user(self):
         return self.wait_element_present(self.SIGNED_IN_USER).text
+ 
         

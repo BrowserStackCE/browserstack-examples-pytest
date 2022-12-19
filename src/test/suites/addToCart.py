@@ -27,3 +27,4 @@ def test_example(driver, base_url):
             driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
         else:
             driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Product added to the cart not same as selected"}}')
+

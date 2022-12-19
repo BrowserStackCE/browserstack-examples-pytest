@@ -36,3 +36,4 @@ def test_offers(driver, base_url):
             driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
         except NoSuchElementException:
             driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Offers Not Found Successfully"}}')
+

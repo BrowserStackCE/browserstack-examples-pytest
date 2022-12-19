@@ -59,3 +59,4 @@ def base_url():
 
 def pytest_sessionfinish(session, exitstatus):
   stop_local()
+

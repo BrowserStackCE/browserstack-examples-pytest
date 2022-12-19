@@ -37,3 +37,4 @@ def test_login_locked_user(driver, base_url):
             driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
         else:
             driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Locked User Test Failed"}}')
+

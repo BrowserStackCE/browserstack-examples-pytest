@@ -10,3 +10,4 @@ pytest-selenium
 pytest-xdist
 pytest-base-url
 python-dotenv
+

@@ -51,3 +51,4 @@ class HomePage(BasePage):
             else:
                 return False
         return True
+

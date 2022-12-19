@@ -40,3 +40,4 @@ def test_price_filter(driver, base_url):
             driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
         else:
             driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Filter Not Successful"}}')
+
