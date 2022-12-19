@@ -3,6 +3,7 @@ from browserstack.local import Local
 import os, json
 from jsonmerge import merge
 from dotenv import load_dotenv
+import time
 
 load_dotenv()
 
@@ -14,6 +15,7 @@ with open(CONFIG_FILE) as data_file:
     CONFIG = json.load(data_file)
 
 bs_local = None
+timenow = None
 
 BROWSERSTACK_USERNAME = os.environ['BROWSERSTACK_USERNAME'] if 'BROWSERSTACK_USERNAME' in os.environ else CONFIG["user"]
 BROWSERSTACK_ACCESS_KEY = os.environ['BROWSERSTACK_ACCESS_KEY'] if 'BROWSERSTACK_ACCESS_KEY' in os.environ else CONFIG["key"]
@@ -21,8 +23,11 @@ BROWSERSTACK_ACCESS_KEY = os.environ['BROWSERSTACK_ACCESS_KEY'] if 'BROWSERSTACK
 def start_local():
     """Code to start browserstack local before start of test."""
     global bs_local
+    global timenow
+    timenow=str(time.time()*1000)
+    print(timenow)
     bs_local = Local()
-    bs_local_args = { "key": BROWSERSTACK_ACCESS_KEY or "access_key", "forcelocal": "true" }
+    bs_local_args = { "key": BROWSERSTACK_ACCESS_KEY or "access_key", "localIdentifier": timenow }
     bs_local.start(**bs_local_args)
 
 def stop_local():
@@ -34,6 +39,7 @@ def stop_local():
 if os.environ['REMOTE'] == "true":
   @pytest.fixture(scope='session')
   def session_capabilities():
+    global timenow
     test_name = os.environ.get('PYTEST_CURRENT_TEST').split(' ')[0].split('::')[1]
     capabilities = merge(CONFIG['environments'][TASK_ID],CONFIG["capabilities"])
     capabilities['bstack:options']['userName'] = BROWSERSTACK_USERNAME
@@ -43,6 +49,7 @@ if os.environ['REMOTE'] == "true":
     print(CONFIG['base_url'])
     if "local" in capabilities['bstack:options'] and capabilities['bstack:options']['local']:
       start_local()
+      capabilities['bstack:options']['localIdentifier'] = timenow
     return capabilities
 
 @pytest.fixture(scope='session')

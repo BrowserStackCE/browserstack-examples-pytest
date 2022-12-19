@@ -17,7 +17,12 @@ setup(
 )
 
 def run_py_test(config, run_type, task_id=0):
-    if run_type == 'remote':
+    if config == 'local' and run_type == 'remote':
+        if platform.system() == "Windows":
+            sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=true && pytest -s src/test/suites/e2e.py --driver Browserstack -n 1"' % (config, task_id))
+        else:
+            sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=true pytest -s src/test/suites/e2e.py --driver Browserstack -n 1' % (config, task_id))
+    elif run_type == 'remote':
         if platform.system() == "Windows":
             sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=true && pytest -s src/test/suites/*.py --driver Browserstack -n 1"' % (config, task_id))
         else:
