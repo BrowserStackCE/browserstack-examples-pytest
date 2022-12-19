@@ -1,0 +1,7 @@
+.env
+__pycache__/
+/test
+Jenkinsfile
+chromedriver
+browserstack.err
+local.log
