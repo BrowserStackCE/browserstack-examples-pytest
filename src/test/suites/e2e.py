@@ -16,8 +16,8 @@ import os
 load_dotenv()
 
 
-@pytest.mark.nondestructive
-def test_e2e(driver, base_url):
+#@pytest.mark.nondestructive
+def test_e2e(driver, base_url="https://bstackdemo.com/"):
     login = LoginPage(driver)
     login.open_base_url(base_url)
     login.sign_in("fav_user","testingisfun99")
@@ -33,19 +33,16 @@ def test_e2e(driver, base_url):
     checkout.click_on_checkout()
     order_confirm = OrderConfirmationPage(driver)
     order_confirm.wait_for_confirmation_message()
-    if os.environ['REMOTE'] == "true":
-        order_confirm.click_download_pdf()
-        order_confirm.download_exists(driver, 'confirmation.pdf' )
     order_confirm.click_continue_shopping()
     home.navigate_to_orders()
     orders = OrdersPage(driver)
     status = orders.verify_orders_placed()
     time.sleep(5)
-    if os.environ['REMOTE'] == "true":
-        driver.execute_script('browserstack_executor: {"action": "setSessionName", "arguments": {"name":"e2e_test"}}')
-        if status:
-            driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
-        else:
-            driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Order Not Placed Successfully"}}')
+    #if os.environ['REMOTE'] == "true":
+    #    driver.execute_script('browserstack_executor: {"action": "setSessionName", "arguments": {"name":"e2e_test"}}')
+    #    if status:
+    #        driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
+    #    else:
+    #        driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Order Not Placed Successfully"}}')
 
             

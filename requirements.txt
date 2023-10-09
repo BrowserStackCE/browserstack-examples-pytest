@@ -1,4 +1,5 @@
 browserstack-local
+browserstack-sdk
 jsonmerge
 multiprocess
 paver

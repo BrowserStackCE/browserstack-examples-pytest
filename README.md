@@ -27,18 +27,6 @@ This repository contains the following Cucumber tests:
 | User    | Login as User with no image loaded  | This test verifies that the product images load for user: "image_not_loading_user" on the e-commerce application. Since the images do not load, the test case assertion fails.                                                                                                    | user    |
 | User    | Login as User with existing Orders  | This test verifies that existing orders are shown for user: "existing_orders_user"                                                                                                                                                                                                | user    |
 
----
-## Configuring the maximum parallel test threads for this repository
-
-For all the parallel run configuration profiles, you can configure the maximum parallel test threads by changing the number of workers in [pavement.py](pavement.py) 
-
-```py
-... pytest -s src/test/suites/e2e.py --driver Browserstack -n 2
-```
-
-eg: Using `-n 2` will execute `2` tests in parallel per environment configuration that has been passed in the capabilities
-
----
 # On Premise
 
 This infrastructure points to running the tests on your own machine using a browser (e.g. Chrome) using the browser's driver executables (e.g. ChromeDriver for Chrome). Selenium enables this functionality using WebDriver for many popular browsers.
@@ -58,7 +46,7 @@ Note: The ChromeDriver version must match the Chrome browser version on your mac
     To run the entire test suite on your own machine, use the following command:
 
     ```sh
-    paver run single on-prem
+    pytest -s src/test/suites/*.py --driver Chrome --driver-path /Path/To/Your/ChromeDriver
     ```
 
 -   Output
@@ -89,29 +77,27 @@ Note: The ChromeDriver version must match the Chrome browser version on your mac
     set BROWSERSTACK_ACCESS_KEY=<browserstack-access-key>
     ```
 
-    Alternatively, you can also hardcode username and access_key objects in the [single.json](src/resources/single.json) file, [parallel.json](src/resources/parallel.json) and [local.json](src/resources/local.json).
-
-Note:
-
--   The exact test capability values can be easily identified using the [Browserstack Capability Generator](https://browserstack.com/automate/capabilities)
+    Alternatively, you can also hardcode username and access_key objects in the browserstack.yml file, 
 
 ## Running Your Tests
 
-### Run the entire test suite in parallel on a single BrowserStack browser
+### Run the entire test suite in parallel on a BrowserStack browser
 
-In this section, we will run the tests in parallel on a single browser on Browserstack. 
+In this section, we will run the tests in parallel on a browser on Browserstack. 
 
 -   How to run the test?
 
-    To run the entire test suite in parallel on a single BrowserStack browser, use the following command:
+    To run the entire test suite in parallel on a BrowserStack browser, update the 'platforms' in the browserstack.yml file &
+    
+    use the following command:
 
     ```sh
-    paver run single remote
+    browserstack-sdk pytest -s src/test/suites/*.py
     ```
 
 -   Output
 
-    This run profile executes the entire test suite in parallel on a single BrowserStack browser. Please refer to your [BrowserStack dashboard](https://automate.browserstack.com/) for test results.
+    This run profile executes the entire test suite in parallel on a BrowserStack browser. Please refer to your [BrowserStack dashboard](https://automate.browserstack.com/) for test results.
 
 ### Run the entire test suite in parallel on multiple BrowserStack browsers
 
@@ -119,10 +105,10 @@ In this section, we will run the tests in parallel on multiple browsers on Brows
 
 -   How to run the test?
 
-    To run the entire test suite in parallel on multiple BrowserStack browsers, use the following command:
+    To run the entire test suite in parallel on multiple BrowserStack browsers, update the 'parallelsperplatform' in the browserstack.yml file & use the following command:
 
     ```sh
-    paver run parallel remote
+    browserstack-sdk pytest -s src/test/suites/*.py
     ```
 ### [Web application hosted on internal environment] Running your tests on BrowserStack using BrowserStackLocal
 
@@ -143,10 +129,10 @@ In this section, we will run the tests in parallel on multiple browsers on Brows
 
 -   How to run the test?
 
-    -   To run the default test scenario (e.g. End to End Scenario) on a single BrowserStack browser using BrowserStackLocal, use the following command:
+    -   To run the default test scenario (e.g. End to End Scenario) on a single BrowserStack browser using BrowserStackLocal, update the 'browserstackLocal' in the browserstack.yml file & use the following command:
 
     ```sh
-    paver run local remote
+    browserstack-sdk pytest -s src/test/suites/*.py
     ```
 
 -   Output

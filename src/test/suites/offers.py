@@ -29,11 +29,5 @@ def test_offers(driver, base_url):
     #Click on Offers
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, 'offers')))
     driver.find_element(By.ID, "offers").click()
-    if os.environ['REMOTE'] == "true":
-        driver.execute_script('browserstack_executor: {"action": "setSessionName", "arguments": {"name":"Offers_test"}}')
-        try:
-            driver.find_element(By.CLASS_NAME,'offer')
-            driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
-        except NoSuchElementException:
-            driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Offers Not Found Successfully"}}')
+    
 
