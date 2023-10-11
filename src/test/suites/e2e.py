@@ -38,11 +38,4 @@ def test_e2e(driver, base_url="https://bstackdemo.com/"):
     orders = OrdersPage(driver)
     status = orders.verify_orders_placed()
     time.sleep(5)
-    #if os.environ['REMOTE'] == "true":
-    #    driver.execute_script('browserstack_executor: {"action": "setSessionName", "arguments": {"name":"e2e_test"}}')
-    #    if status:
-    #        driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
-    #    else:
-    #        driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Order Not Placed Successfully"}}')
-
-            
+    

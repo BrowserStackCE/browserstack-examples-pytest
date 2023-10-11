@@ -22,7 +22,7 @@ def test_apple_filter(driver, base_url):
 
 
 @pytest.mark.nondestructive
-def test_price_filter(driver, base_url):
+def test_price_filter(driver, base_url="https://bstackdemo.com/"):
     login = LoginPage(driver)
     login.open_base_url(base_url)
     login.sign_in("fav_user","testingisfun99")

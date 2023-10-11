@@ -87,12 +87,10 @@ In this section, we will run the tests in parallel on a browser on Browserstack.
 
 -   How to run the test?
 
-    To run the entire test suite in parallel on a BrowserStack browser, update the 'platforms' in the browserstack.yml file &
-    
-    use the following command:
+    To run the entire test suite in parallel on a BrowserStack browser, use the following command:
 
     ```sh
-    browserstack-sdk pytest -s src/test/suites/*.py
+    browserstack-sdk pytest -s src/test/suites/*.py --browserstack.config=./browserstack_single.yml
     ```
 
 -   Output
@@ -105,10 +103,10 @@ In this section, we will run the tests in parallel on multiple browsers on Brows
 
 -   How to run the test?
 
-    To run the entire test suite in parallel on multiple BrowserStack browsers, update the 'parallelsperplatform' in the browserstack.yml file & use the following command:
+    To run the entire test suite in parallel on multiple BrowserStack browsers, use the following command:
 
     ```sh
-    browserstack-sdk pytest -s src/test/suites/*.py
+    browserstack-sdk pytest -s src/test/suites/*.py --browserstack.config=./browserstack_parallel.yml
     ```
 ### [Web application hosted on internal environment] Running your tests on BrowserStack using BrowserStackLocal
 
@@ -132,7 +130,7 @@ In this section, we will run the tests in parallel on multiple browsers on Brows
     -   To run the default test scenario (e.g. End to End Scenario) on a single BrowserStack browser using BrowserStackLocal, update the 'browserstackLocal' in the browserstack.yml file & use the following command:
 
     ```sh
-    browserstack-sdk pytest -s src/test/suites/*.py
+    browserstack-sdk pytest -s src/test/suites/*.py --browserstack.config=./browserstack_local.yml
     ```
 
 -   Output

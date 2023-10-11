@@ -12,7 +12,7 @@ from src.pages.homePage import HomePage
 import os
 
 @pytest.mark.nondestructive
-def test_existing_orders(driver, base_url):
+def test_existing_orders(driver, base_url="https://bstackdemo.com/"):
     login = LoginPage(driver)
     login.open_base_url(base_url)
     login.sign_in("existing_orders_user","testingisfun99")
@@ -23,7 +23,7 @@ def test_existing_orders(driver, base_url):
 
 
 @pytest.mark.nondestructive
-def test_no_image(driver, base_url):
+def test_no_image(driver, base_url="https://bstackdemo.com/"):
     login = LoginPage(driver)
     login.open_base_url(base_url)
     login.sign_in("image_not_loading_user","testingisfun99")

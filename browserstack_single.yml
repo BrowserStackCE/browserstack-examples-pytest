@@ -3,8 +3,8 @@
 # =============================
 # Add your BrowserStack userName and accessKey here or set BROWSERSTACK_USERNAME and
 # BROWSERSTACK_ACCESS_KEY as env variables
-userName: abisheksurendrab_vKBnUQ
-accessKey: XeYLV5ZHsViiFXVFuBqx
+userName: 
+accessKey: 
 
 # ======================
 # BrowserStack Reporting
@@ -33,10 +33,6 @@ platforms:
   - os: OS X
     osVersion: Big Sur
     browserName: Chrome
-    browserVersion: latest
-  - os: Windows
-    osVersion: 10
-    browserName: Edge
     browserVersion: latest
     
 # =======================

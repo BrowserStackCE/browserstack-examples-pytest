@@ -10,7 +10,7 @@ import os
 
 
 @pytest.mark.nondestructive
-def test_offers(driver, base_url):
+def test_offers(driver, base_url="https://bstackdemo.com/"):
     driver.get(base_url)
     driver.execute_script('navigator.geolocation.getCurrentPosition = function(success){ var position = { "coords":{"latitude":"1","longitude":"103"}}; success(position);}')
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, 'signin')))
