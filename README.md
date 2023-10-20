@@ -117,7 +117,7 @@ In this section, we will run the tests in parallel on multiple browsers on Brows
     git clone https://github.com/browserstack/browserstack-demo-app
     ```
 -   Please follow the README.md on the BrowserStack demo application repository to install and start the dev server on localhost.
--   In this section, we will run a single test case to test the BrowserStack Demo app hosted on your local machine i.e. localhost. Refer to the `browserstack.local` object in `nightwatch-browserstack.conf.js` file to change test capabilities for this configuration.
+-   In this section, we will run a single test case to test the BrowserStack Demo app hosted on your local machine i.e. localhost. 
 -   Note: You may need to provide additional BrowserStackLocal arguments to successfully connect your localhost environment with BrowserStack infrastructure. (e.g if you are behind firewalls, proxy or VPN).
 -   Further details for successfully creating a BrowserStackLocal connection can be found here:
 
