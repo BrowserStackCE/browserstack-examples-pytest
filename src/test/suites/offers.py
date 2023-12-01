@@ -7,10 +7,17 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import time
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 @pytest.mark.nondestructive
 def test_offers(driver, base_url="https://bstackdemo.com/"):
+    staging = os.environ.get("LOCAL") 
+    if (staging=="True"):
+        base_url="http://localhost:3000/"
+    else:
+        base_url="https://bstackdemo.com/"
     driver.get(base_url)
     driver.execute_script('navigator.geolocation.getCurrentPosition = function(success){ var position = { "coords":{"latitude":"1","longitude":"103"}}; success(position);}')
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, 'signin')))

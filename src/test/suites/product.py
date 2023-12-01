@@ -9,9 +9,17 @@ import time
 from src.pages.loginPage import LoginPage
 from src.pages.homePage import HomePage
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 @pytest.mark.nondestructive
-def test_apple_filter(driver, base_url):
+def test_apple_filter(driver, base_url="https://bstackdemo.com/"):
+    staging = os.environ.get("LOCAL") 
+    if (staging=="True"):
+        base_url="http://localhost:3000/"
+    else:
+        base_url="https://bstackdemo.com/"
     login = LoginPage(driver)
     login.open_base_url(base_url)
     login.sign_in("fav_user","testingisfun99")
@@ -23,6 +31,11 @@ def test_apple_filter(driver, base_url):
 
 @pytest.mark.nondestructive
 def test_price_filter(driver, base_url="https://bstackdemo.com/"):
+    staging = os.environ.get("LOCAL") 
+    if (staging=="True"):
+        base_url="http://localhost:3000/"
+    else:
+        base_url="https://bstackdemo.com/"
     login = LoginPage(driver)
     login.open_base_url(base_url)
     login.sign_in("fav_user","testingisfun99")

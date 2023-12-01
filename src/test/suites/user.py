@@ -10,9 +10,17 @@ from src.pages.loginPage import LoginPage
 from src.pages.orders import OrdersPage
 from src.pages.homePage import HomePage
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 @pytest.mark.nondestructive
 def test_existing_orders(driver, base_url="https://bstackdemo.com/"):
+    staging = os.environ.get("LOCAL") 
+    if (staging=="True"):
+        base_url="http://localhost:3000/"
+    else:
+        base_url="https://bstackdemo.com/"
     login = LoginPage(driver)
     login.open_base_url(base_url)
     login.sign_in("existing_orders_user","testingisfun99")
@@ -24,6 +32,11 @@ def test_existing_orders(driver, base_url="https://bstackdemo.com/"):
 
 @pytest.mark.nondestructive
 def test_no_image(driver, base_url="https://bstackdemo.com/"):
+    staging = os.environ.get("LOCAL") 
+    if (staging=="True"):
+        base_url="http://localhost:3000/"
+    else:
+        base_url="https://bstackdemo.com/"
     login = LoginPage(driver)
     login.open_base_url(base_url)
     login.sign_in("image_not_loading_user","testingisfun99")

@@ -12,12 +12,18 @@ from src.pages.orders import OrdersPage
 
 from dotenv import load_dotenv
 import os
+import json
 
 load_dotenv()
 
 
 #@pytest.mark.nondestructive
 def test_e2e(driver, base_url="https://bstackdemo.com/"):
+    staging = os.environ.get("LOCAL") 
+    if (staging=="True"):
+        base_url="http://localhost:3000/"
+    else:
+        base_url="https://bstackdemo.com/"
     login = LoginPage(driver)
     login.open_base_url(base_url)
     login.sign_in("fav_user","testingisfun99")

@@ -3,9 +3,18 @@ from selenium import webdriver
 import pytest
 from selenium.webdriver.common.by import By
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 @pytest.mark.nondestructive
 def test_example(driver, base_url="https://bstackdemo.com/"):
+    staging = os.environ.get("LOCAL") 
+    if (staging=="True"):
+        base_url="http://localhost:3000/"
+    else:
+        base_url="https://bstackdemo.com/"
+    
     driver.get(base_url)
 
     # locating product on webpage and getting name of the product
