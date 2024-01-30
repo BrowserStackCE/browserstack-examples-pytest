@@ -108,6 +108,19 @@ In this section, we will run the tests in parallel on multiple browsers on Brows
     ```sh
     browserstack-sdk pytest -s src/test/suites/*.py --browserstack.config ./src/conf/browserstack_parallel.yml
     ```
+
+### Managing Parallelism in Your Test Suite and Running Tests on Browserstack
+
+Browserstack leverages pytest-xdist for internal test-level parallelization, allowing you to efficiently run your test suite across multiple BrowserStack browsers concurrently.
+
+-   Running Tests with the Required Parallelization:
+
+    To execute your entire test suite in parallel on multiple BrowserStack browsers, use the following command:
+
+    ```sh
+    browserstack-sdk pytest -n 3 -s src/test/suites/*.py
+    ```
+    
 ### [Web application hosted on internal environment] Running your tests on BrowserStack using BrowserStackLocal
 
 #### Prerequisites
