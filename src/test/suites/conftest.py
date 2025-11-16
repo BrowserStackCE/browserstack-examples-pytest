@@ -7,7 +7,7 @@ def setWebdriver(session_capabilities):
 
     driver = webdriver.Remote(
         command_executor=remote_url,
-        options=webdriver.ChromeOptions().from_capabilities(session_capabilities)
+        desired_capabilities=session_capabilities
     )
 
     yield driver
