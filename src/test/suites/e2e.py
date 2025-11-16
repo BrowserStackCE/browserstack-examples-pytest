@@ -1,12 +1,11 @@
 import os
+import pytest
 
-def __init__(self, driver):
-    self.driver = driver
-
-#@pytest.mark.nondestructive
-def test_e2e(driver, base_url="https://bstackdemo.com/"):
-    base_url = os.environ.get("CX_TEST_URL", base_url)
-    page_source = driver.page_source
+@pytest.mark.usefixtures('setWebdriver')
+def test_e2e(self):
+    base_url = os.environ.get("CX_TEST_URL", "https://bstackdemo.com/")
+    self.driver.get(base_url)
+    page_source = self.driver.page_source
     print(f"Page Source Length: {len(page_source)}")
     # Assert that the page source length > 100
     assert len(page_source) > 100, "Page source length is not greater than 100!"
