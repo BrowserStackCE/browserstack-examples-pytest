@@ -1,11 +1,11 @@
 userName: $BROWSERSTACK_USERNAME
 accessKey: $BROWSERSTACK_ACCESS_KEY
 framework: pytest
-browserstackLocal: false
-buildName: "Test"
+browserstackLocal: ${BROWSERSTACK_LOCAL}
+buildName: ${BROWSERSTACK_BUILD_NAME}
 buildIdentifier: "${BUILD_NUMBER:-local-build}"
-source: "Test"
-projectName: "Test"
+source: ${BROWSERSTACK_BUILD_NAME}
+projectName: ${BROWSERSTACK_PROJECT_NAME}
 percy: true
 percyCaptureMode: testcase
 debug: true
