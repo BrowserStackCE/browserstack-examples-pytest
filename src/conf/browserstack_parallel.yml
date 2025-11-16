@@ -1,10 +1,11 @@
 userName: $BROWSERSTACK_USERNAME
 accessKey: $BROWSERSTACK_ACCESS_KEY
 framework: pytest
-browserstackLocal: ${BROWSERSTACK_LOCAL}
-buildName: ${BROWSERSTACK_BUILD_NAME}
-source: ${BROWSERSTACK_BUILD_NAME}
-projectName: ${BROWSERSTACK_PROJECT_NAME}
+browserstackLocal: false
+buildName: "Test"
+buildIdentifier: "${BUILD_NUMBER:-local-build}"
+source: "Test"
+projectName: "Test"
 percy: true
 percyCaptureMode: testcase
 debug: true
@@ -20,3 +21,4 @@ accessibilityOptions:
         experimental: false # Default: true
         advanced: false
 parallelsPerPlatform: ${BSTACK_PARALLELS}
+
