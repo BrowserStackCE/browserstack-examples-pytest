@@ -5,3 +5,7 @@ Jenkinsfile
 chromedriver
 browserstack.err
 local.log
+**/**/.pytest_cache
+venv
+**/**/.gitkeep
+.DS_Store
