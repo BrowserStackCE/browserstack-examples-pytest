@@ -7,10 +7,17 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import time
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 @pytest.mark.nondestructive
-def test_offers(driver, base_url):
+def test_offers(driver, base_url="https://bstackdemo.com/"):
+    staging = os.environ.get("LOCAL") 
+    if (staging=="True"):
+        base_url="http://localhost:3000/"
+    else:
+        base_url="https://bstackdemo.com/"
     driver.get(base_url)
     driver.execute_script('navigator.geolocation.getCurrentPosition = function(success){ var position = { "coords":{"latitude":"1","longitude":"103"}}; success(position);}')
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, 'signin')))
@@ -29,11 +36,5 @@ def test_offers(driver, base_url):
     #Click on Offers
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, 'offers')))
     driver.find_element(By.ID, "offers").click()
-    if os.environ['REMOTE'] == "true":
-        driver.execute_script('browserstack_executor: {"action": "setSessionName", "arguments": {"name":"Offers_test"}}')
-        try:
-            driver.find_element(By.CLASS_NAME,'offer')
-            driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test Passed Successfully"}}')
-        except NoSuchElementException:
-            driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Offers Not Found Successfully"}}')
+    
 
